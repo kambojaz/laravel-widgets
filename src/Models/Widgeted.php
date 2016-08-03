@@ -15,4 +15,8 @@ class Widgeted extends Model
      * {@inheritdoc}
      */
     public $table = 'widgeted';
+    
+    protected $casts = [
+        'data' => 'array',
+    ];
 }

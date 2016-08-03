@@ -16,9 +16,12 @@ class CreateWidgetedTable extends Migration
             
             $table->increments('id');
 
-            $table->unsignedInteger('widget_id');
-
             $table->morphs('widgeted');
+            
+
+            $table->unsignedInteger('widget_id');
+            
+            $table->text('data')->nullable();
 
             $table->engine = 'InnoDB';
 

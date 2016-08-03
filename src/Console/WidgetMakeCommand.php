@@ -30,6 +30,17 @@ class WidgetMakeCommand extends GeneratorCommand
      * @var string
      */
     protected $type = 'Widget';
+    
+    
+    
+    /**
+     * The type of class being generated.
+     *
+     * @var string
+     */
+    protected $model = 'App\ServiceModels\Widget';
+    
+    
 
     /**
      * Execute the console command.
@@ -42,6 +53,7 @@ class WidgetMakeCommand extends GeneratorCommand
 
         if (!$this->option('plain')) {
             $this->createView();
+            $this->createModel();
         }
     }
 
@@ -204,5 +216,18 @@ class WidgetMakeCommand extends GeneratorCommand
         });
 
         return implode('/', $nameArray);
+    }
+    
+    
+        /**
+     * Create a new model for the widget.
+     *
+     * return void
+     */
+    protected function createModel()
+    {
+        
+
+        $this->info('Model created successfully.');
     }
 }

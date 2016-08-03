@@ -3,6 +3,7 @@
 namespace {{namespace}};
 
 use Arrilot\Widgets\AbstractWidget;
+use Arrilot\Widgets\Models\WidgetModel;
 
 class {{class}} extends AbstractWidget
 {
@@ -11,7 +12,18 @@ class {{class}} extends AbstractWidget
      *
      * @var array
      */
-    protected $config = [];
+    protected $config = [
+        'widget' => null,
+    ];
+
+
+    /**
+    * The database model of widget
+    *
+    * @var 
+    */
+    protected $model = null;
+
 
     /**
      * Treat this method as a controller action.
@@ -19,10 +31,16 @@ class {{class}} extends AbstractWidget
      */
     public function run()
     {
-        //
+        if(!$this->model) {
+        
+            $this->model = WidgetModel::whereClass(get_class($this))->find();
+        }
+        $this->config['widget'] = $this->model;
 
-        return view("{{view}}", [
-            'config' => $this->config,
-        ]);
+
+
+        extract($this->config);
+
+        return view("{{view}}", compact(array_keys($this->config)));
     }
 }

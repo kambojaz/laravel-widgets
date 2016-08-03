@@ -6,6 +6,8 @@ use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 
+use DB;
+
 class WidgetMakeCommand extends GeneratorCommand
 {
     use AppNamespaceDetectorTrait;
@@ -40,6 +42,7 @@ class WidgetMakeCommand extends GeneratorCommand
      */
     protected $model = 'App\ServiceModels\Widget';
     
+    protected $model_id = null;
     
 
     /**
@@ -53,7 +56,6 @@ class WidgetMakeCommand extends GeneratorCommand
 
         if (!$this->option('plain')) {
             $this->createView();
-            $this->createModel();
         }
     }
 
@@ -68,7 +70,10 @@ class WidgetMakeCommand extends GeneratorCommand
     {
         $stub = $this->files->get($this->getStub());
 
-        $stub = $this->replaceNamespace($stub, $name)->replaceClass($stub, $name);
+        $stub = $this
+            ->replaceNamespace($stub, $name)
+            ->replaceClass($stub, $name)
+            ;
 
         if (!$this->option('plain')) {
             $stub = $this->replaceView($stub);
@@ -144,7 +149,9 @@ class WidgetMakeCommand extends GeneratorCommand
 
         return str_replace('{{view}}', $view, $stub);
     }
+    
 
+    
     /**
      * Get the default namespace for the class.
      *
@@ -215,7 +222,7 @@ class WidgetMakeCommand extends GeneratorCommand
             $part = snake_case($part);
         });
 
-        return implode('/', $nameArray);
+        return implode('/', $nameArray); 
     }
     
     
@@ -226,7 +233,9 @@ class WidgetMakeCommand extends GeneratorCommand
      */
     protected function createModel()
     {
-        
+        $id = DB::table('users')->insertGetId(
+            ['email' => 'john@example.com', 'votes' => 0]
+        );
 
         $this->info('Model created successfully.');
     }

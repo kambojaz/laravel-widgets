@@ -52,6 +52,8 @@ class WidgetMakeCommand extends GeneratorCommand
      */
     public function fire()
     {
+        $this->createModel();
+        
         parent::fire();
 
         if (!$this->option('plain')) {
@@ -233,9 +235,13 @@ class WidgetMakeCommand extends GeneratorCommand
      */
     protected function createModel()
     {
-        $id = DB::table('users')->insertGetId(
-            ['email' => 'john@example.com', 'votes' => 0]
-        );
+        $name = $this->parseName($this->getNameInput());
+        
+        $this->model_id = DB::table('widgets')->insertGetId([
+            'class' => $name, 
+            'title' => $name,
+            'data'  => null
+        ]);
 
         $this->info('Model created successfully.');
     }

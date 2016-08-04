@@ -4,6 +4,7 @@ namespace Arrilot\Widgets\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
 
 class WidgetModel extends Model
 {
@@ -27,6 +28,8 @@ class WidgetModel extends Model
 //        return $this->hasMany('App\Widget', 'widget_id');
 //    }
     
+    
+   
     
     
     

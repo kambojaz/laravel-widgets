@@ -40,6 +40,7 @@ class WidgetMakeCommand extends GeneratorCommand
      *
      * @var string
      */
+    protected $model = 'App\ServiceModels\Widget';
     
     protected $model_id = null;
     

@@ -18,6 +18,15 @@ class {{class}} extends AbstractWidget
 
 
     /**
+    * The config data fields array.
+    *
+    * @var array
+    */
+    public $fields = [
+
+    ];
+
+    /**
     * The database model of widget
     *
     * @var 
@@ -33,7 +42,7 @@ class {{class}} extends AbstractWidget
     {
         if(!$this->model) {
         
-            $this->model = WidgetModel::whereClass(get_class($this))->find();
+            $this->model = WidgetModel::whereClass(get_class($this))->first();
         }
         $this->config['widget'] = $this->model;
 

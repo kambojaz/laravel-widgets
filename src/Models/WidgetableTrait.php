@@ -12,7 +12,10 @@ trait WidgetableTrait
     
     public function widgets() {
         
-        return $this->morphToMany(WidgetModel::class, 'widgetable', 'widgeted', 'widgetable_id', 'widget_id');
+        return $this
+            ->morphToMany(WidgetModel::class, 'widgeted', 'widgeted', 'widgeted_id', 'widget_id')
+            ->withPivot(['data'])
+            ;
     }
     
 }
